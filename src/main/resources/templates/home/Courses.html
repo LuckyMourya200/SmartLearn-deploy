@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Smart Learn</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="container mt-5">
+            <h2>Explore Courses</h2>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h3>Programming Courses</h3>
+                    <ul class="list-group">
+                        <li th:each="course : ${programming}" class="list-group-item">
+                            <strong th:text="${course.courseTitle}"></strong>
+                            <p th:text="${course.courseDescription}"></p>
+                            <a th:href="@{/user/explore}" class="btn btn-primary btn-sm">Details</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h3>Computer Science Courses</h3>
+                    <ul class="list-group">
+                        <li th:each="course : ${cs}" class="list-group-item">
+                            <strong th:text="${course.courseTitle}"></strong>
+                            <p th:text="${course.courseDescription}"></p>
+                            <a th:href="@{/user/explore}" class="btn btn-primary btn-sm">Details</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h3>Web Development Courses</h3>
+                    <ul class="list-group">
+                        <li th:each="course : ${web}" class="list-group-item">
+                            <strong th:text="${course.courseTitle}"></strong>
+                            <p th:text="${course.courseDescription}"></p>
+                            <a th:href="@{/user/explore}" class="btn btn-primary btn-sm">Details</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h3>Other Courses</h3>
+                    <ul class="list-group">
+                        <li th:each="course : ${other}" class="list-group-item">
+                            <strong th:text="${course.courseTitle}"></strong>
+                            <p th:text="${course.courseDescription}"></p>
+                            <a th:href="@{/user/explore}" class="btn btn-primary btn-sm">Details</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

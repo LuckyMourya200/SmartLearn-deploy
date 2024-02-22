@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Smart Learn</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div th:if="${param.logout}">
+            <div class="alert alert-success">You have been logged out !!!</div>
+        </div>
+        <div class="container mt-5">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold">Welcome to Smart Learn</h1>
+                    <p class="col-md-8 fs-4">
+                        Welcome to Smart Learn, a platform for interactive and engaging learning experiences.
+                        Choose your role below to get started!
+                    </p>
+                    <a th:href="@{/about}" class="btn btn-secondary btn-lg">Learn More</a>
+                </div>
+            </div>
+            <div class="row align-items-md-stretch">
+                <div class="col-md-6">
+                    <div class="h-100 p-5 text-white bg-dark rounded-3">
+                        <h2>Faculty Interface</h2>
+                        <p>
+                            As a faculty member, you can manage courses, assignments, and interact with students.
+                            Explore the features designed to make teaching and learning seamless.
+                        </p>
+                        <a th:href="@{/faculty}" class="btn btn-outline-light">Go to Faculty Interface</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="h-100 p-5 bg-light border rounded-3">
+                        <h2>User Interface</h2>
+                        <p>
+                            As a user, access a variety of courses, track your progress, and engage with interactive
+                            learning materials. Unlock a world of knowledge at your fingertips.
+                        </p>
+                        <a th:href="@{/user}" class="btn btn-outline-dark">Go to User Interface</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="h-100 p-5 bg-light text-dark rounded-3">
+                        <h2>Admin Interface</h2>
+                        <p>
+                            Admins have access to the entire system. Manage users, monitor system health, and ensure
+                            a smooth learning experience for all. Dive into the admin dashboard now!
+                        </p>
+                        <a th:href="@{/admin}" class="btn btn-outline-dark">Go to Admin Interface</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

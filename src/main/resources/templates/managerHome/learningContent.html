@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout4"
+    layout:decorate="~{layout4}">
+
+<head>
+    <title>Smart Learn</title>
+
+</head>
+
+<body>
+    <div class="container" layout:fragment="content4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="mb-0">Course ID: <span th:text="${courseObj.courseId}"></span></h2>
+                <p class="text-muted mb-0">Course Title: <span th:text="${courseObj.courseTitle}"></span></p>
+            </div>
+            <a th:href="@{/manager/courses}" class="btn btn-secondary">Back to Course List</a>
+        </div>
+        
+        
+
+        <div style="margin-bottom: 10px;">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Add Learning Content</h5>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/manager/LearningContent}" role="form" th:object="${obj}" method="post"
+                                enctype="multipart/form-data">
+                                <input type="hidden" th:field="*{course}">
+                                <div class="form-group">
+                                    <label for="unit">Unit</label>
+                                    <input type="text" class="form-control" id="unit" th:field="*{unit}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contentTitle">Title</label>
+                                    <input type="text" class="form-control" id="contentTitle" th:field="*{contentTitle}"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contentDescription">Content Description</label>
+                                    <textarea class="form-control" id="contentDescription"
+                                        th:field="*{contentDescription}" rows="5" placeholder="Enter content details"
+                                        required></textarea>
+                                </div>
+                                <div class="form-group" style="margin-top: 10px;">
+                                    <label for="file">Upload Image</label>
+                                    <img id="uploadedCropImage" class="img-fluid" width="500" height="500"
+                                        style="display: none; margin-bottom: 10px;" alt="Uploaded Crop Image">
+                                    <input type="file" name="file" id="file" onchange="displayCropImage()"
+                                        style="display: none;">
+                                    <label for="file" class="btn btn-outline-secondary">
+                                        <i class="fas fa-upload"></i> Choose Image
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-outline-success">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function displayCropImage() {
+                var input = document.getElementById('file');
+                var img = document.getElementById('uploadedCropImage');
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        img.src = e.target.result;
+                        img.style.display = 'block';
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+        <style>
+            .img-system {
+                background-color: #ffffff;
+                border: 1px solid #d2d2d2;
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            .img {
+                margin-bottom: 20px;
+            }
+        </style>
+
+
+
+        <div class="d-flex flex-wrap ">
+            <h1 class="flex-grow-1">[[#{learningContent.list.headline}]]</h1>
+        </div>
+        <div th:if="${learningContentList.empty}">No Data found. Create a new Learning Content</div>
+        <div th:if="${!learningContentList.empty}" class="table-responsive">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <p class="text-muted mb-0">Course Title: <span th:text="${courseObj.courseTitle}"></span></p>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="row">
+                    <div th:each="content : ${learningContentList}" class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="card-subtitle text-muted"><span th:text="${content.unit}"></span></h6>
+                            </div>
+                            <img th:if="${content.hasImage}"
+                                th:src="@{'/manager/LearningContent/image/' + ${content.contentId}}"
+                                class="card-img-top" alt="Content Image">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${content.contentTitle}"></h5>
+                                <p class="card-text" th:text="${content.contentDescription}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

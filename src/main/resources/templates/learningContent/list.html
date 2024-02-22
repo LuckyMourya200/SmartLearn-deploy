@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout3"
+        layout:decorate="~{layout3}">
+    <head>
+        <title>Smart Learn</title>
+
+    </head>
+    <body>
+        <div layout:fragment="content3">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{learningContent.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/admin/learningContents/add}" class="btn btn-primary ms-2">[[#{learningContent.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${learningContents.empty}">[[#{learningContent.list.empty}]]</div>
+            <div th:if="${!learningContents.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <caption>List of Learning Contents</caption>
+  
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{learningContent.contentId.label}]]</th>
+                            <th scope="col">[[#{learningContent.contentTitle.label}]]</th>
+                            <th scope="col">[[#{learningContent.course.label}]]</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr th:each="learningContent : ${learningContents}">
+                            <td>[[${learningContent.contentId}]]</td>
+                            <td>[[${learningContent.contentTitle}]]</td>
+                            <td>[[${learningContent.course}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/admin/learningContents/edit/{contentId}(contentId=${learningContent.contentId})}" class="btn btn-sm btn-secondary">[[#{learningContent.list.edit}]]</a>
+                                    <form th:action="@{/admin/learningContents/delete/{contentId}(contentId=${learningContent.contentId})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{learningContent.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

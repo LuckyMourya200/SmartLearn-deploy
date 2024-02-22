@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout3"
+        layout:decorate="~{layout3}">
+    <head>
+        <title>Smart Learn</title>
+
+    </head>
+    <body>
+        <div layout:fragment="content3">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{userProgress.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/admin/userProgresses/add}" class="btn btn-primary ms-2">[[#{userProgress.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${userProgresses.empty}">[[#{userProgress.list.empty}]]</div>
+            <div th:if="${!userProgresses.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <caption>List of users Progress</caption>
+  
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{userProgress.progressId.label}]]</th>
+                            <th scope="col">[[#{userProgress.completionStatus.label}]]</th>
+                            <th scope="col">[[#{userProgress.user.label}]]</th>
+                            <th scope="col">[[#{userProgress.course.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr th:each="userProgress : ${userProgresses}">
+                            <td>[[${userProgress.progressId}]]</td>
+                            <td>[[${userProgress.completionStatus}]]</td>
+                            <td>[[${userProgress.user}]]</td>
+                            <td>[[${userProgress.course}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/admin/userProgresses/edit/{progressId}(progressId=${userProgress.progressId})}" class="btn btn-sm btn-secondary">[[#{userProgress.list.edit}]]</a>
+                                    <form th:action="@{/admin/userProgresses/delete/{progressId}(progressId=${userProgress.progressId})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{userProgress.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

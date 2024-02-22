@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout2"
+    layout:decorate="~{layout2}">
+
+<head>
+    <title>Smart Learn</title>
+</head>
+
+<body>
+    <div layout:fragment="content2">
+
+        <h1 class="text-center">My Courses </h1>
+        <div class="row">
+            <div th:each="course : ${mycourses}" class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${course.courseTitle}"></h5>
+                        <p class="card-text" th:text="${course.courseDescription}"></p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="${'Type: ' + course.courseType}"></li>
+                            <li class="list-group-item" th:text="${'Duration: ' + course.courseDuration}"></li>
+                            <li class="list-group-item" th:text="${'Price: ' + course.coursePrice}"></li>
+                            <li class="list-group-item"><a th:href="@{/user/learningContent/{courseId}(courseId=${course.courseId})}" class="btn btn-secondary btn-sm">Getting Started</a></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

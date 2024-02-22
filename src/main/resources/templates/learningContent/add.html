@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout3"
+        layout:decorate="~{layout3}">
+    <head>
+        <title>Smart Learn</title>
+
+    </head>
+    <body>
+        <div layout:fragment="content3">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{learningContent.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/admin/learningContents}" class="btn btn-secondary">[[#{learningContent.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('learningContent')}" />
+            <form th:action="${requestUri}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='learningContent', field='contentTitle', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='learningContent', field='contentDescription', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='learningContent', field='course', type='select')}" />
+                <input type="submit" th:value="#{learningContent.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

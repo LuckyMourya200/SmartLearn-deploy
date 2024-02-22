@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout3"
+        layout:decorate="~{layout3}">
+    <head>
+        <title>Smart Learn</title>
+
+    </head>
+    <body>
+        <div layout:fragment="content3">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{course.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/admin/courses/add}" class="btn btn-primary ms-2">[[#{course.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${courses.empty}">[[#{course.list.empty}]]</div>
+            <div th:if="${!courses.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <caption>List of Courses</caption>
+  
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{course.courseId.label}]]</th>
+                            <th scope="col">[[#{course.courseTitle.label}]]</th>
+                            <th scope="col">[[#{course.courseType.label}]]</th>
+               
+                            <th scope="col">Price</th>
+                            <th scope="col">Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr th:each="course : ${courses}">
+                            <td>[[${course.courseId}]]</td>
+                            <td>[[${course.courseTitle}]]</td>
+                            <td>[[${course.courseType}]]</td>
+                            <td>[[${course.coursePrice}]]</td>
+                            <td>[[${course.courseDuration}]]</td>
+                           
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/admin/courses/edit/{courseId}(courseId=${course.courseId})}" class="btn btn-sm btn-secondary">[[#{course.list.edit}]]</a>
+                                    <form th:action="@{/admin/courses/delete/{courseId}(courseId=${course.courseId})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{course.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

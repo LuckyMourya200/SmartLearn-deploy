@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout2"
+    layout:decorate="~{layout2}">
+
+<head>
+    <title>Smart Learn</title>
+</head>
+
+<body>
+    <div layout:fragment="content2">
+
+        <style>
+            .obj {
+                background-color: #f8f9fa;
+                padding: 50px;
+            }
+    
+            .course-details {
+                background-color: #fff;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+    
+            .enroll-btn {
+                font-size: 1.2em;
+            }
+        </style>
+        <div class="obj">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 course-details">
+                        <h2 th:text="${obj.courseTitle}"></h2>
+                        <p>Description: <Span th:text="${obj.courseDescription}"></Span></p>
+                        <p>Duration: <Span th:text="${obj.courseDuration}"></Span></p>
+                        <p>Instructor: Smart Learn</p>
+                        <p>Price: <Span th:text="${obj.coursePrice}"></Span></p>
+                        <p class="text-info">Enjoy complimentary access to this course with our exclusive welcome offer!</p>
+                        <a th:href="@{/user/enroll/{courseId}(courseId=${obj.courseId})}" class="btn btn-primary enroll-btn">Enroll Now</a>
+                        <p class="text-muted">Note: This course may require payment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

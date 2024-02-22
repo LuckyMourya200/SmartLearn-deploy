@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout2"
+    layout:decorate="~{layout2}">
+
+<head>
+    <title>Smart Learn</title>
+</head>
+
+<body>
+    <div layout:fragment="content2">
+        <style>
+            .d-flex {
+                margin-bottom: 20px; /* Add margin to the flex container */
+            }
+    
+            .card {
+                margin-bottom: 20px; /* Add margin to each card */
+            }
+    
+            .card-header {
+                padding: 10px; /* Add padding to the card header */
+            }
+    
+            .card-body {
+                padding: 20px; /* Add padding to the card body */
+            }
+        </style>
+    
+        <div class="d-flex flex-wrap mb-4">
+            <h1 class="flex-grow-1"><span th:text="${courseObject.courseId}"></span> <span th:text="${courseObject.courseTitle}"></span></h1>
+            <div>
+                <a th:href="@{/user/myCourses}" class="btn btn-secondary">back to courses</a>
+            </div>
+        </div>
+        
+        <div th:each="content : ${learningContentPage}">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="card-subtitle text-muted"><span th:text="${content.unit}"></span></h6>
+                </div>
+                <!-- <img th:if="${content.hasImage}" th:src="@{'/manager/LearningContent/image/' + ${content.contentId}}"
+                    class="card-img-top" alt="Content Image"> -->
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${content.contentTitle}"></h5>
+                    <p class="card-text" th:text="${content.contentDescription}"></p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In doloremque debitis quia pariatur consequuntur? Voluptatibus, sequi? Repudiandae, doloremque. Optio, molestiae? Non ducimus sapiente repellendus deserunt illo culpa, nihil assumenda animi.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In doloremque debitis quia pariatur consequuntur? Voluptatibus, sequi? Repudiandae, doloremque. Optio, molestiae? Non ducimus sapiente repellendus deserunt illo culpa, nihil assumenda animi.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In doloremque debitis quia pariatur consequuntur? Voluptatibus, sequi? Repudiandae, doloremque. Optio, molestiae? Non ducimus sapiente repellendus deserunt illo culpa, nihil assumenda animi.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In doloremque debitis quia pariatur consequuntur? Voluptatibus, sequi? Repudiandae, doloremque. Optio, molestiae? Non ducimus sapiente repellendus deserunt illo culpa, nihil assumenda animi.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In doloremque debitis quia pariatur consequuntur? Voluptatibus, sequi? Repudiandae, doloremque. Optio, molestiae? Non ducimus sapiente repellendus deserunt illo culpa, nihil assumenda animi.</p>
+                </div>
+            </div>
+        </div>
+        <div th:replace="~{fragments/forms :: pagination}"></div>
+    </div>
+</body>
+
+</html>

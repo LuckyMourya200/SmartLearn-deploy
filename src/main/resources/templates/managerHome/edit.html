@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout4"
+        layout:decorate="~{layout4}">
+    <head>
+        <title>Smart Learn</title>
+
+    </head>
+    <body>
+        <div layout:fragment="content4">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{course.edit.headline}]]</h1>
+                <div>
+                    <a th:href="@{/manager/courses}" class="btn btn-secondary">[[#{course.edit.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('course')}" />
+            <form th:action="${requestUri}" method="post">
+                <div th:replace="~{fragments/forms::inputRow(object='course', field='courseId', disabled=true, type='number')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='course', field='courseTitle', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='course', field='courseDescription', type='textarea')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='course', field='courseDuration', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='course', field='coursePrice', required=true)}" />
+
+                <div th:replace="~{fragments/forms::inputRow(object='course', field='courseType')}" />
+                <input type="submit" th:value="#{course.edit.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

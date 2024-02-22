@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout4"
+    layout:decorate="~{layout4}">
+
+<head>
+    <title>Smart Learn</title>
+</head>
+
+<body>
+    <div layout:fragment="content4">
+
+        <style>
+            .form-container {
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2>Manager Profile</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-2 col-form-label"><strong>UserName:</strong></label>
+                            <div class="col-sm-4">
+                                <p id="username" th:text="${obj.username}" class="form-control-plaintext"></p>
+                            </div>
+                            <label for="email" class="col-sm-2 col-form-label"><strong>Email:</strong></label>
+                            <div class="col-sm-4">
+                                <p id="email" th:text="${obj.email}" class="form-control-plaintext"></p>
+                            </div>
+                            <label for="roles" class="col-sm-2 col-form-label"><strong>Roles:</strong></label>
+                            <div class="col-sm-4">
+                                <p id="roles" class="form-control-plaintext"><span sec:authentication="principal.authorities"/></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
